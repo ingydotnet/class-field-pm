@@ -1,4 +1,4 @@
-use Test::More tests => 8;
+use Test::More tests => 9;
 
 package Foo;
 use base 't::Base';
@@ -8,6 +8,8 @@ field 'x';
 field 'y' => [];
 field 'z' => {};
 field 'i', -init => '$self->hello';
+
+my $xyz = field 'xyz';
 
 sub hello {
     my $self = shift;
@@ -43,3 +45,12 @@ $foo->i('Goodbye');
 
 is $foo->{i}, 'Goodbye',
     'Setting field works';
+
+is $xyz, <<'...', 'Code generation is right';
+sub {
+  local *__ANON__ = "Foo::xyz";
+  return $_[0]->{xyz} unless $#_ > 0;
+  $_[0]->{xyz} = $_[1];
+  return $_[0]->{xyz};
+}
+...

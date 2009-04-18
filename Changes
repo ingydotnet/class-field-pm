@@ -1,4 +1,10 @@
 ---
+version: 0.15
+date:    Sat Apr 18 09:21:21 PDT 2009
+change:
+- Make stack trace not say ANON
+
+---
 version: 0.14
 date:    Fri Apr 25 12:20:38 CST 2008
 change:
