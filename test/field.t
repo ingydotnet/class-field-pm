@@ -1,7 +1,11 @@
+use strict;
+use File::Basename;
+use lib dirname(__FILE__), 'inc';
+
 use Test::More tests => 9;
 
 package Foo;
-use base 't::Base';
+use base 'TestFieldBase';
 use Class::Field 'field';
 
 field 'x';

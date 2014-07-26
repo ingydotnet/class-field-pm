@@ -1,30 +1,30 @@
 ---
+version: 0.16
+date:    Sat Jul 26 00:19:48 PDT 2014
+changes:
+- Switch to Zilla::Dist
+---
 version: 0.15
 date:    Sat Apr 18 09:21:21 PDT 2009
-change:
+changes:
 - Make stack trace not say ANON
-
 ---
 version: 0.14
 date:    Fri Apr 25 12:20:38 CST 2008
-change:
+changes:
 - Make Class::Field work with utf8 package names
-
 ---
 version: 0.12
 date:    Fri Feb 17 11:48:15 PST 2006
-change:
+changes:
 - 0.11 got corrupted on the way to CPAN. Grrrrrrrrrr!
-
 ---
 version: 0.11
 date:    Fri Feb 17 11:32:47 PST 2006
-change:
+changes:
 - 0.10 got corrupted on the way to CPAN
-
 ---
 version: 0.10
 date:    Tue Jan 31 00:44:04 PST 2006
-change:
+changes:
 - Maiden voyage
-

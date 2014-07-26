@@ -1,7 +1,11 @@
+use strict;
+use File::Basename;
+use lib dirname(__FILE__), 'inc';
+
 use Test::More tests => 4;
 
 package Foo;
-use base 't::Base';
+use base 'TestFieldBase';
 use Class::Field 'const';
 
 const 'this' => 'Charming Man';

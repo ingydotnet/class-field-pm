@@ -1,0 +1,28 @@
+=meta: 0.0.1
+
+name: Class-Field
+version: 0.16
+abstract: Class Field Accessor Generator
+homepage: https://metacpan.org/release/Class-Field
+
+license: perl
+copyright: 2001-2014. Ingy döt Net.
+author:
+  name: Ingy döt Net
+  email: ingy@cpan.org
+  github: ingydotnet
+  twitter: ingydotnet
+  freenode: ingy
+  homepage: http://ingy.net
+
+requires:
+  perl: 5.8.1
+
+devel:
+  git: https://github.com/ingydotnet/class-field-pm
+  bug: https://github.com/ingydotnet/class-field-pm/issues
+  irc: irc.freenode.net#ingy
+
+=travis:
+  type: perl
+  irc: irc.freenode.net#ingy

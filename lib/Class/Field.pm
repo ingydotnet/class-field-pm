@@ -1,12 +1,12 @@
+use strict; use warnings;
 package Class::Field;
-use 5.006001;
-use strict;
-use warnings;
-use base 'Exporter';
-use Encode;
+our $VERSION = '0.16';
 
-our $VERSION = '0.15';
+use base 'Exporter';
+
 our @EXPORT_OK = qw(field const);
+
+use Encode;
 
 my %code = (
     sub_start =>
@@ -62,7 +62,7 @@ sub field {
       if defined $default;
     $code .= sprintf $code{return_if_get}, $field;
     $code .= sprintf $code{set}, $field;
-    $code .= sprintf $code{weaken}, $field, $field 
+    $code .= sprintf $code{weaken}, $field, $field
       if $args->{-weak};
     $code .= sprintf $code{sub_end}, $field;
 
@@ -119,91 +119,10 @@ sub parse_arguments {
             push @values, $elem;
         }
     }
-    return wantarray ? ($args, @values) : $args;        
+    return wantarray ? ($args, @values) : $args;
 }
 
 sub boolean_arguments { () }
 sub paired_arguments { () }
 
-__END__
-
-=head1 NAME
-
-Class::Field - Class Field Accessor Generator
-
-=head1 SYNOPSIS
-
-    package Thing;
-    use Class::Field qw'field const';
-
-    field 'this';
-    field 'list' => [];
-    field 'map' => {};
-    field 'that', -init => '$self->setup_that';
-    field 'circular_ref' => -weaken;
-    const 'answer' => 42;
-
-=head1 DESCRIPTION
-
-Class::Field exports two subroutines, C<field> and C<const>. These
-functions are used to declare fields and constants in your class.
-
-Class::Field generates custom code for each accessor that is optimized
-for speed.
-
-=head1 FUNCTIONS
-
-=over 4
-
-=item * field
-
-Defines accessor methods for a field of your class:
-
-    package Example;
-    use base 'Parent';
-    use Class::Field qw'field const';
-    
-    field 'foo';
-    field bar => [];
-
-    sub lalala {
-        my $self = shift;
-        $self->foo(42);
-        push @{$self->{bar}}, $self->foo;
-    }
-
-The first parameter passed to C<field> is the name of the attribute
-being defined. Accessors can be given an optional default value.
-This value will be returned if no value for the field has been set
-in the object.
-
-=item * const
-
-    const bar => 42;
-
-The C<const> function is similar to <field> except that it is immutable.
-It also does not store data in the object. You probably always want to
-give a C<const> a default value, otherwise the generated method will be
-somewhat useless.
-
-=back
-
-=head1 NOTE
-
-This code was taken directly out the Spiffy module for those people who just
-want this functionality without using the rest of Spiffy.
-
-=head1 AUTHOR
-
-Ingy döt Net <ingy@cpan.org>
-
-=head1 COPYRIGHT
-
-Copyright (c) 2006, 2008, 2009. Ingy döt Net.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-See L<http://www.perl.com/perl/misc/Artistic.html>
-
-=cut
+1;

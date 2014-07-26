@@ -1,4 +1,4 @@
-package t::Base;
+package TestFieldBase;
 
 sub new {
     my $self = bless {}, shift;
