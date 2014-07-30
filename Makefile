@@ -54,6 +54,7 @@ help:
 	@echo '    make upgrade   - Upgrade the build system (Makefile)'
 	@echo '    make readme    - Make the ReadMe.pod file'
 	@echo '    make travis    - Make a travis.yml file'
+	@echo '    make uninstall - Uninstall the dist from this repo'
 	@echo ''
 	@echo '    make clean     - Clean up build files'
 	@echo '    make help      - Show this help'
@@ -76,7 +77,7 @@ prereqs:
 
 update: makefile
 	@echo '***** Updating/regenerating repo content'
-	make readme contrib travis version
+	make readme contrib travis version webhooks
 
 release: clean update check-release date test disttest
 	@echo '***** Releasing $(DISTDIR)'
@@ -145,6 +146,10 @@ contrib:
 travis:
 	$(PERL) -S zild-render-template travis.yml .travis.yml
 
+uninstall: distdir
+	(cd $(DISTDIR); perl Makefile.PL; make uninstall)
+	make clean
+
 clean purge:
 	rm -fr cpan .build $(DIST) $(DISTDIR)
 
@@ -179,3 +184,6 @@ date:
 
 version:
 	$(PERL) -S zild-version-update
+
+webhooks:
+	$(PERL) -S zild webhooks
