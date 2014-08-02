@@ -1,12 +1,12 @@
 =meta: 0.0.1
 
 name: Class-Field
-version: 0.18
+version: 0.19
 abstract: Class Field Accessor Generator
 homepage: https://metacpan.org/release/Class-Field
 
 license: perl
-copyright: 2001-2014. Ingy döt Net.
+copyright: 2006-2014. Ingy döt Net.
 author:
   name: Ingy döt Net
   email: ingy@cpan.org
