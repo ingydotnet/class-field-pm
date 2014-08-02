@@ -1,6 +1,6 @@
 use strict; use warnings;
 package Class::Field;
-our $VERSION = '0.17';
+our $VERSION = '0.18';
 
 use base 'Exporter';
 
