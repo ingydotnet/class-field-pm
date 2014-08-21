@@ -1,7 +1,7 @@
 =meta: 0.0.2
 
 name: Class-Field
-version: 0.22
+version: 0.23
 abstract: Class Field Accessor Generator
 homepage: https://metacpan.org/release/Class-Field
 language: perl

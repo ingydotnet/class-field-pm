@@ -72,7 +72,7 @@ somewhat useless.
 
 =head1 NOTE
 
-this code was taken directly out the Spiffy module for those people who just
+This code was taken directly out the Spiffy module for those people who just
 want this functionality without using the rest of Spiffy.
 
 =head1 AUTHOR
