@@ -1,9 +1,4 @@
-Class::Field
-============
-
-Class Field Accessor Generator
-
-<badge travis coveralls ingydotnet/class-field-pm>
+<<<cpan-head>>>
 
 = Synopsis
 
@@ -62,15 +57,4 @@ for speed.
 This code was taken directly out the Spiffy module for those people who just
 want this functionality without using the rest of Spiffy.
 
-= Author
-
-ingy döt Net <ingy@cpan.org>
-
-= Copyright
-
-Copyright 2006-2014. Ingy döt Net.
-
-This program is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself.
-
-See http://www.perl.com/perl/misc/Artistic.html
+<<<cpan-tail>>>

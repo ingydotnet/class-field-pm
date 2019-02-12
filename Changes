@@ -1,4 +1,9 @@
 ---
+version: 0.24
+date:    Tue Feb 12 13:55:49 PST 2019
+changes:
+- Apply https://github.com/ingydotnet/class-field-pm/pull/3 @mtmail++
+---
 version: 0.23
 date:    Thu Aug 21 12:06:13 PDT 2014
 changes:
