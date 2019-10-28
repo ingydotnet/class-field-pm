@@ -72,7 +72,6 @@ sub field {
     my $sub = eval $code;
     die $@ if $@;
     no strict 'refs';
-    use utf8;
     my $method = "${package}::$field";
     $method = Encode::decode_utf8($method);
     *{$method} = $sub;
