@@ -24,6 +24,15 @@ my %code = (
       "  } unless \$#_ > 0 or defined \$_[0]->{%s};\n",
     return_if_get =>
       "  return \$_[0]->{%s} unless \$#_ > 0;\n",
+    isa_exception => "die('failed isa check for %s')",
+    isa =>
+      "  do { local \$_ = \$_[1]; \$type->(\$_[1]) } or %s;\n",
+    isa_typetiny =>
+      "  %s;",
+    isa_inline_check =>
+      "  do { %s } or %s;",
+    isa_check =>
+      "  \$type->check(\$_[1]) or %s;",
     set =>
       "  \$_[0]->{%s} = \$_[1];\n",
     weaken =>
@@ -37,7 +46,7 @@ sub field {
     my ($args, @values) = do {
         no warnings;
         local *boolean_arguments = sub { (qw(-weak)) };
-        local *paired_arguments = sub { (qw(-package -init)) };
+        local *paired_arguments = sub { (qw(-package -init -isa)) };
         Class::Field->parse_arguments(@_);
     };
     my ($field, $default) = @values;
@@ -64,6 +73,28 @@ sub field {
     $code .= sprintf $code{set_default}, $field, $default_string, $field
       if defined $default;
     $code .= sprintf $code{return_if_get}, $field;
+    
+    my $type; # if type cannot be inlined, this will be closed over
+    if ($type = $args->{-isa}) {
+        my $ecode = sprintf $code{isa_exception}, $field;
+        if (ref($type) eq 'CODE') {
+            $code .= sprintf $code{isa}, $ecode;
+        }
+        elsif (eval { $type->isa('Type::Tiny'); Type::Tiny->VERSION('1.008') }) {
+            $code .= sprintf $code{isa_typetiny}, $type->inline_assert('$_[1]', '$type', attribute_name => $field, attribute_step => 'isa check');
+        }
+        elsif (eval { $type->can_be_inlined }) {
+            my $i = $type->can('inline_check') || $type->can('_inline_check');
+            $code .= sprintf $code{isa_inline_check}, $type->$i('$_[1]'), $ecode;
+        }
+        elsif (eval { $type->can('check') }) {
+            $code .= sprintf $code{isa_check}, $ecode;
+        }
+        else {
+            die 'cannot handle -isa';
+        }
+    }
+    
     $code .= sprintf $code{set}, $field;
     $code .= sprintf $code{weaken}, $field, $field
       if $args->{-weak};

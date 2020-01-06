@@ -4,12 +4,14 @@
 
   package Thing;
   use Class::Field qw'field const';
+  use Types::Standard qw(Int);
 
   field 'this';
   field 'list' => [];
   field 'map' => {};
   field 'that', -init => '$self->setup_that';
   field 'circular_ref' => -weaken;
+  field 'counter', -init => '0', -isa => Int;
   const 'answer' => 42;
 
 = Description
@@ -42,6 +44,11 @@ for speed.
   The first parameter passed to `field` is the name of the attribute being
   defined. Accessors can be given an optional default value. This value will
   be returned if no value for the field has been set in the object.
+
+  The `-isa` argument allows you to set a type constraint for the field's
+  value. It can be either a blessed object with a `check` method (like
+  L<Type::Tiny>, L<MooseX::Types>, etc) or a coderef that inspects `$_`
+  and returns a boolean. Default values are not checked.
 
 - `const`
 
