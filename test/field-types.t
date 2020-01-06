@@ -5,7 +5,7 @@ use Test::More;
 
 BEGIN {
     eval { require Types::Standard; }
-        ? plan(tests    => 1)
+        ? plan(tests    => 4)
         : plan(skip_all => 'test require Types::Standard')
 };
 
